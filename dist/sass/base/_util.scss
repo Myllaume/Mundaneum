@@ -1,0 +1,7 @@
+@for $i from 1 through 12 {
+    $flex : $i * 8.333333 * 1%;
+
+    .col-#{$i} {
+        width: #{$flex};
+    }
+}
