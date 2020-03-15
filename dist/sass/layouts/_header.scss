@@ -1,14 +1,67 @@
 .header-page {
-    z-index: 100;
     position: absolute;
-    top: -150px;
+    top: 0px;
     left: 0px;
-    background-image: url('./fonds/texture_bois.jpg');
-    background-position: top;
-    background-size: cover;
     height: 300px;
     width: 100%;
-    clip-path: ellipse(50% 50%);
-    border-radius: 0 0 100% 100%;
-    box-shadow: inset 0px 0px 20px 2px rgba(245, 245, 245, 0.8);
+    
+    &__bg {
+        z-index: -1;
+        top: -150px;
+        left: 0px;
+        position: absolute;
+        background-image: url('./fonds/texture_bois.jpg');
+        background-position: top;
+        background-size: cover;
+        clip-path: ellipse(50% 50%);
+        width: 100%;
+        height: 300px;
+        border-radius: 0 0 100% 100%;
+        box-shadow: inset 0px 0px 20px 2px rgba(245, 245, 245, 0.8);
+    }
+
+    &__btn-box {
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        width: 300px;
+    }
+
+    &__btn {
+        cursor: pointer;
+        margin: 0 3rem;
+        width: 50px;
+        height: 50px;
+        font-size: 0px;
+
+        $btns_name : 'menu', 'metadata', 'search';
+
+        @each $name in $btns_name {
+            &--#{$name} {
+                background-image: url('./fonds/fond_btn_#{$name}.svg');
+                background-size: cover;
+                background-color: transparent;
+                border: 0px;
+            }
+        }
+    }
+}
+
+.logo-site {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    bottom: -50px;
+    background-image: url('./fonds/fond_armillaire.svg');
+    width: 150px;
+    height: 150px;
+
+    &__armillaire {
+        background-image: url('./fonds/armillaire.svg');
+        background-repeat: no-repeat;
+        background-position: center center;
+        height: 70%;
+        width: 70%;
+    }
 }
