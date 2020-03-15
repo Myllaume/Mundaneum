@@ -1,8 +1,17 @@
 body {
-    cursor: default;
+    cursor: none;
     padding: 0;
     margin: 0;
     background-color: $color-noir;
+}
+
+.cursor {
+    transform: rotate(20deg);
+    background-size: cover;
+    position: absolute;
+    width: 80px;
+    height: 40px;
+    background-image: url("./fonds/cursor.svg");
 }
 
 .wrapper-general {
