@@ -1,0 +1,14 @@
+.header-page {
+    z-index: 100;
+    position: absolute;
+    top: -150px;
+    left: 0px;
+    background-image: url('./fonds/texture_bois.jpg');
+    background-position: top;
+    background-size: cover;
+    height: 300px;
+    width: 100%;
+    // border-radius: 0px 0px 100% 100%;
+
+    clip-path: ellipse(50% 50%);
+}

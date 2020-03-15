@@ -1,0 +1,15 @@
+.main-page {
+    display: flex;
+    padding-top: 200px;
+    background-image: url('./fonds/texture_papier.jpg');
+    background-size: cover;
+}
+
+.content-page {
+    flex: 3;
+}
+
+.lateral-page {
+    flex: 1;
+    // flex-basis: 300px;
+}
