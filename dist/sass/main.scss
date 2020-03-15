@@ -1,7 +1,9 @@
 // ABSTRACTS
 @import './abstracts/variable';
+@import './abstracts/placeholder';
 
 // BASE
+@import './base/fonts';
 @import './base/typography';
 @import './base/page';
 @import './base/util';
