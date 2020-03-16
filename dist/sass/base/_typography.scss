@@ -2,6 +2,18 @@ html {
     font-size: 62.5%;
 }
 
+@media (max-width: $breakpoint-large - 1) {
+    html {
+        font-size: 68.5%;
+    }
+}
+
+@media (max-width: $breakpoint-medium - 1) {
+    html {
+        font-size: 72.5%;
+    }
+}
+
 body {
     @extend %font-body-regular;
     /* tous les textes auront une

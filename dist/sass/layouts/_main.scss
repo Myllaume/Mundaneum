@@ -19,10 +19,22 @@
     }
 }
 
+@media (max-width: $breakpoint-medium - 1) {
+    .main-page {
+        padding: 30px 20px 150px 20px;
+    }
+}
+
 .content-page {
     flex: 3;
 }
 
 .lateral-page {
     flex: 1;
+}
+
+@media (max-width: $breakpoint-medium - 1) {
+    .lateral-page {
+        display: none;
+    }
 }
