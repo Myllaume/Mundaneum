@@ -4,11 +4,13 @@ class Page {
     private $id;
     private $path;
     private $title;
+    private $lang;
 
     function __construct() {
         $this->id = strval($this->id);
         $this->path = strval($this->path);
         $this->title = strval($this->title);
+        $this->lang = 'fr';
     }
 
     /**
@@ -53,7 +55,7 @@ class Page {
         $this->title = $var;
     }
 
-    function get_pseudo() {
+    function get_title() {
         return $this->title;
     }
 
@@ -99,8 +101,16 @@ class Page {
         echo '</section>';
     }
 
-    function gen_body($main = true, $lateral = true) {
+    function gen_page($main = true, $lateral = true) {
         echo '
+        <!DOCTYPE html>
+        <html lang="fr">';
+
+        $this->gen_head();
+
+        echo '
+        <body>
+
         <div class="bg-page"></div>
         <div class="wrapper-general">';
 
@@ -125,7 +135,11 @@ class Page {
             </div>
         </div>
 
-        <script src="./assets/main.js"></script>';
+        <script src="./assets/main.js"></script>
+
+        <body>
+
+        </html>';
     }
 
     /**

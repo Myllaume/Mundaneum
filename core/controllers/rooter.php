@@ -15,7 +15,8 @@ switch ($view) {
         if (empty($_GET['title'])) {
             include_once './core/models/page.php';
             $class_page = new Page;
-            $class_page->gen_body($main = 'publications.php', $lateral = false);
+            $class_page->set_title('Liste des publications');
+            $class_page->gen_page($main = 'publications.php', $lateral = false);
 
             exit;
         }
@@ -23,6 +24,7 @@ switch ($view) {
         include_once './core/models/page.php';
         $class_page = new Page;
         $class_page->set_path('./data/' . $_GET['title'] . '/');
-        $class_page->gen_body();
+        $class_page->set_title('Article ' . $_GET['title']);
+        $class_page->gen_page();
         break;
 }
