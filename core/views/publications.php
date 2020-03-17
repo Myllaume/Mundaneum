@@ -6,8 +6,28 @@ $hidden_items = array('.', '..', '.DS_Store');
 $list_article = array_diff($content_repo, $hidden_items);
 ?>
 
-<ul>
-    <?php foreach ($list_article as $key => $name_article): ?>
-    <a href="?view=article&title=<?= $name_article ?>"><li><?= $name_article ?></li></a>
+<h1>Liste des publications</h1>
+
+<table>
+    <thead>
+        <tr>
+            <th>Titre</th>
+            <th>Catégorie</th>
+            <th>Tags</th>
+        </tr>
+    </thead>
+
+    <tbody>
+    <?php foreach ($list_article as $key => $name_article):
+    $name_article_clean = str_replace('-', ' ', $name_article);
+    $name_article_clean = ucfirst($name_article_clean);
+    ?>
+        <tr>
+            <td><a href="?view=article&title=<?= $name_article ?>"><?= $name_article_clean ?></a></td>
+            <td>Divers</td>
+            <td>Essaie, début, départ</td>
+        </tr>
     <?php endforeach; ?>
-</ul>
+    </tbody>
+
+</table>
