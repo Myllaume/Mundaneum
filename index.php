@@ -12,10 +12,7 @@
 <body>
 
     <?php
-    include_once './core/models/page.php';
-    $class_page = new Page;
-    $class_page->set_path('./data/essaie/');
-    $class_page->gen_body();
+    include_once './core/controllers/rooter.php';
     ?>
 
 </body>
