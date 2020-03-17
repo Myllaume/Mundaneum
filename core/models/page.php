@@ -79,15 +79,19 @@ class Page {
         include_once './core/views/header.php';
     }
 
-    function gen_main() {
+    function gen_main($type) {
         echo '<section class="content-page">';
 
-        echo $this->markdown_file_to_HTML('main');
+        if ($type === true) {
+            echo $this->markdown_file_to_HTML('main');
+        } else {
+            include_once './core/views/'  . $type;
+        }
         
         echo '</section>';
     }
 
-    function gen_lateral() {
+    function gen_lateral($type) {
         echo '<section class="lateral-page">';
 
         echo $this->markdown_file_to_HTML('lateral');
@@ -95,7 +99,7 @@ class Page {
         echo '</section>';
     }
 
-    function gen_body() {
+    function gen_body($main = true, $lateral = true) {
         echo '
         <div class="bg-page"></div>
         <div class="wrapper-general">';
@@ -104,12 +108,16 @@ class Page {
 
         echo '
             <div class="wrapper-content">
-            
+
                 <main class="main-page">
                     <div class="main-page__bg"></div>';
 
-                    $this->gen_main();
-                    $this->gen_lateral();
+                    if ($main) {
+                        $this->gen_main($main);
+                    }
+                    if ($lateral) {
+                        $this->gen_lateral($lateral);
+                    }
 
         echo '
                 </main>

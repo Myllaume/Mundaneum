@@ -13,6 +13,10 @@ switch ($view) {
     
     case 'article':
         if (empty($_GET['title'])) {
+            include_once './core/models/page.php';
+            $class_page = new Page;
+            $class_page->gen_body($main = 'publications.php', $lateral = false);
+
             exit;
         }
 
