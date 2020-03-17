@@ -11,7 +11,7 @@ switch ($view) {
         include_once './core/views/home.html';
         break;
     
-    case 'article':
+    case 'publications':
         if (empty($_GET['title'])) {
             include_once './core/models/page.php';
             $class_page = new Page;

@@ -8,7 +8,7 @@
             <button class="header-page__btn header-page__btn--menu">Menu</button>
         </div>
 
-        <a href="./">
+        <a href="/Mundaneum/">
         <div class="logo-site">
             <div class="logo-site__armillaire"></div>
         </div>

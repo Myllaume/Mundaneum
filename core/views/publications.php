@@ -23,7 +23,7 @@ $list_article = array_diff($content_repo, $hidden_items);
     $name_article_clean = ucfirst($name_article_clean);
     ?>
         <tr>
-            <td><a href="?view=article&title=<?= $name_article ?>"><?= $name_article_clean ?></a></td>
+            <td><a href="./publications/<?= $name_article ?>"><?= $name_article_clean ?></a></td>
             <td>Divers</td>
             <td>Essaie, début, départ</td>
         </tr>

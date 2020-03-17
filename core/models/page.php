@@ -72,7 +72,7 @@ class Page {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>' . $this->title . '</title>
 
-            <link rel="stylesheet" href="./assets/main.css">
+            <link rel="stylesheet" href="/Mundaneum/assets/main.css">
         </head>
         ';
     }
@@ -135,7 +135,7 @@ class Page {
             </div>
         </div>
 
-        <script src="./assets/main.js"></script>
+        <script src="/Mundaneum/assets/main.js"></script>
 
         <body>
 

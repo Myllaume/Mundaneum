@@ -1,0 +1,12 @@
+# Le serveur doit suivre les liens symboliques :
+Options +FollowSymlinks
+
+# Activation du module de réécriture d'URL :
+RewriteEngine on
+
+#--------------------------------------------------
+# Règles de réécriture d'URL :
+#--------------------------------------------------
+
+RewriteRule ^([a-z]+)$ ./index.php?view=$1 [L]
+RewriteRule ^publications/([a-zA-Z0-9_'-]+)$ ./index.php?view=publications&title=$1 [L]
