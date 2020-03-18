@@ -16,7 +16,7 @@
 
         <div class="header-page__btn-box">
             <button class="header-page__btn header-page__btn--search">Rechercher</button>
-            <button class="header-page__btn header-page__btn--metadata">Métadonnées</button>
+            <button class="header-page__btn header-page__btn--metadata" data-toggle="modal" data-target="#modal-metadata">Métadonnées</button>
         </div>
 
     </div>

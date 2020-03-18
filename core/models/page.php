@@ -4,13 +4,15 @@ class Page {
     private $id;
     private $path;
     private $title;
-    private $lang;
+    private $categorie;
+    private $langage;
 
     function __construct() {
         $this->id = strval($this->id);
         $this->path = strval($this->path);
         $this->title = strval($this->title);
-        $this->lang = 'fr';
+        $this->categorie = strval($this->categorie);
+        $this->langage = 'fr';
     }
 
     /**
@@ -59,6 +61,34 @@ class Page {
         return $this->title;
     }
 
+    function set_categorie($var) {
+        $list_categories = ['bibliotéconomie', 'sans catégorie'];
+
+        if (!in_array($var, $list_categories, true)) {
+            throw new Exception("Cette catégorie de page n'est pas reconnue");
+        }
+        
+        $this->categorie = $var;
+    }
+
+    function get_categorie() {
+        return $this->categorie;
+    }
+
+    function set_langage($var) {
+        $list_categories = ['fr', 'en'];
+
+        if (in_array($var, $list_categories, true)) {
+            throw new Exception("Cette langue n'est pas reconnue");
+        }
+        
+        $this->langage = $var;
+    }
+
+    function get_langage() {
+        return $this->langage;
+    }
+
     /**
      * ======================================================
      * Générateurs
@@ -72,9 +102,9 @@ class Page {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>' . $this->title . '</title>
 
+            <link rel="stylesheet" href="/Mundaneum/libs/bootstrap/css/bootstrap.min.css">
             <link rel="stylesheet" href="/Mundaneum/assets/main.css">
-        </head>
-        ';
+        </head>';
     }
 
     function gen_header() {
@@ -87,7 +117,7 @@ class Page {
         if ($type === true) {
             echo $this->markdown_file_to_HTML('main');
         } else {
-            include_once './core/views/'  . $type;
+            include_once './core/views/' . $type;
         }
         
         echo '</section>';
@@ -133,13 +163,36 @@ class Page {
                 </main>
 
             </div>
-        </div>
+        </div>';
 
+        include_once './core/views/modals.php';
+
+        echo '
+        <script src="/Mundaneum/libs/jquery.min.js"></script>
+        <script src="/Mundaneum/libs/bootstrap/js/bootstrap.min.js"></script>
         <script src="/Mundaneum/assets/main.js"></script>
 
         <body>
 
         </html>';
+    }
+
+    function gen_metadata_board() {
+        $metadata_list = $this->JSON_file_to_Page();
+
+        echo '
+        <table>
+            <tbody>';
+        foreach ($metadata_list as $metadata => $value) {
+            echo '
+                <tr>
+                    <td>' . $metadata . '<td>
+                    <td>' . $value . '<td>
+                </tr>';
+        }
+        echo '
+            </tbody>
+        </table>';
     }
 
     /**
@@ -169,7 +222,7 @@ class Page {
             throw new Exception("Aucun fichier JSON trouvé");
         }
     
-        $json_file_content = json_decode($json_file, true);
+        $json_file_content = json_decode($json_file_content, true);
         return $json_file_content;
     }
 }
