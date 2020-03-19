@@ -75,7 +75,11 @@ function transformLinks() {
             var url = link.href.split("/");
             var articleTitle  = url[url.length-1];
 
-            insertArticle(articleTitle);
+            animLoadPage();
+
+            setTimeout(function() {
+                insertArticle(articleTitle);
+            }, 5000);
             
         })
     });

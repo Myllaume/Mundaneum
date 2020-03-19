@@ -30,6 +30,7 @@
                     <button class="header-page__btn header-page__btn--menu">Menu</button>
                 </div>
                 <div id="back-to-menu" class="logo-site">
+                    <div class="logo-site__bg"></div>
                     <div class="logo-site__armillaire"></div>
                 </div>
                 <div class="header-page__btn-box">
