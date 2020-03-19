@@ -131,31 +131,14 @@ class Page {
         echo '</section>';
     }
 
-    function gen_body($main = true, $lateral = true) {
-        echo '
-        <div class="bg-page"></div>
-        <div class="wrapper-general">';
+    function gen_content($main = true, $lateral = true) {
 
-            $this->gen_header();
-
-        echo '
-            <div class="wrapper-content">
-
-                <main class="main-page">
-                    <div class="main-page__bg"></div>';
-
-                    if ($main) {
-                        $this->gen_main($main);
-                    }
-                    if ($lateral) {
-                        $this->gen_lateral($lateral);
-                    }
-
-        echo '
-                </main>
-
-            </div>
-        </div>';
+        if ($main) {
+            $this->gen_main($main);
+        }
+        if ($lateral) {
+            $this->gen_lateral($lateral);
+        }
     }
 
     function gen_page($main = true, $lateral = true) {

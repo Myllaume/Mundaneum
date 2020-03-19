@@ -11,12 +11,50 @@
 
 <body>
 
-    <main class="home-content">
+    <div class="home-content <?php if (isset($_GET) && !empty($_GET['view'])) {echo 'home-content--hide';} ?> ">
         <div class="home-bg"></div>
         <div class="home-roll"></div>
-    </main>
+    </div>
 
-    <div id="cible"><?php include_once './core/controllers/rooter.php'; ?></div>
+    <div class="bg-page"></div>
+
+    <div class="wrapper-general">
+
+        <header class="header-page">
+
+            <div class="header-page__bg"></div>
+
+            <div class="wrapper-content flex-center">
+                
+                <div class="header-page__btn-box">
+                    <button class="header-page__btn header-page__btn--menu">Menu</button>
+                </div>
+                <div id="back-to-menu" class="logo-site">
+                    <div class="logo-site__armillaire"></div>
+                </div>
+                <div class="header-page__btn-box">
+                    <button class="header-page__btn header-page__btn--search">Rechercher</button>
+                    <button class="header-page__btn header-page__btn--metadata">Métadonnées</button>
+                </div>
+
+            </div>
+
+        </header>
+
+        <div class="wrapper-content">
+
+            <main class="main-page">
+
+                <div class="main-page__bg"></div>
+
+                <div id="cible" class="main-page__conteneur">
+                    <?php include_once './core/controllers/rooter.php'; ?>
+                </div>
+
+            </main>
+
+        </div>
+    </div>
 
     <script src="/Mundaneum/libs/jquery.min.js"></script>
     <script src="/Mundaneum/libs/bootstrap/js/bootstrap.min.js"></script>

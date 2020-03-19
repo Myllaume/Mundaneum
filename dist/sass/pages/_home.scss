@@ -10,6 +10,10 @@
 }
 
 .home-content {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
     z-index: 200;
     display: flex;
     justify-content: center;

@@ -5,12 +5,6 @@ body {
     background-color: $color-noir;
 }
 
-#cible {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-}
-
 .cursor {
     transform: rotate(20deg);
     background-size: cover;

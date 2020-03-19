@@ -1,4 +1,5 @@
 var cible = document.querySelector('#cible');
+var backToMenu = document.querySelector('#back-to-menu');
 const ajaxLink = '/Mundaneum/core/controllers/rooter.php';
 
 var homePage = {
@@ -8,6 +9,10 @@ var homePage = {
     open: function() {
         this.conteneur.classList.remove('home-content--hide');
         document.body.style.overflow = 'hidden';
+        window.scrollTo(0, 0);
+
+        var stateObj = {};
+        history.pushState(stateObj, "menu", "./");
     },
 
     close: function() {
@@ -21,6 +26,10 @@ homePage.roll.addEventListener('click', () => {
     insertPublicationList();
 });
 
+backToMenu.addEventListener('click', () => {
+    homePage.open();
+})
+
 function insertPublicationList() {
     $.get( ajaxLink , { view: "publications" },
     function( html ) {
@@ -28,7 +37,7 @@ function insertPublicationList() {
         cible.innerHTML = html;
         
         var stateObj = {};
-        history.pushState(stateObj, "liste des publications", "publications");
+        history.pushState(stateObj, "liste des publications", "./publications");
         eval("transformLinks();");
         
     }, 'html' )
@@ -56,6 +65,8 @@ function insertArticle(articleTitle) {
 
 function transformLinks() {
     var links = document.querySelectorAll('a');
+    console.log(links);
+    
 
     links.forEach(link => {
         link.addEventListener('click', (e) => {
@@ -69,3 +80,5 @@ function transformLinks() {
         })
     });
 }
+
+transformLinks();

@@ -30,14 +30,13 @@ switch ($view) {
         if (empty($_GET['title'])) {
             $class_page = new Page;
             $class_page->set_title('Liste des publications');
-            $class_page->gen_body($main = 'publications.php', $lateral = false);
-
-            exit;
+            $class_page->gen_content($main = 'publications.php', $lateral = false);
+        } else {
+            $class_page = new Page;
+            $class_page->set_path( ROOT . '/data/' . $_GET['title'] . '/');
+            $class_page->set_title('Article ' . $_GET['title']);
+            $class_page->gen_content();
         }
-
-        $class_page = new Page;
-        $class_page->set_path( ROOT . '/data/' . $_GET['title'] . '/');
-        $class_page->set_title('Article ' . $_GET['title']);
-        $class_page->gen_body();
+                
         break;
 }
