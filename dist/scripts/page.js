@@ -1,15 +1,52 @@
-var cible = document.querySelector('#cible');
-var backToMenu = document.querySelector('#back-to-menu');
 const ajaxLink = '/Mundaneum/core/controllers/rooter.php';
+
+var page = {
+    conteneur: document.querySelector('#cible'),
+
+    getName: function() {
+        var pageURL = window.location.href;
+        pageURLArray = pageURL.split("/");
+        return pageURLArray[pageURLArray.length-1];
+    },
+
+    scroll: function(bool) {
+        if (bool === true) {
+            document.body.style.overflow = 'auto';
+        } else {
+            document.body.style.overflow = 'hidden';
+        }
+    },
+
+    goTop: function() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth'
+        });
+    }
+}
+
+window.onpopstate = function(event) {
+    switch (page.getName()) {
+        case 'publications':
+            insertPublicationList();
+            break;
+
+        default:
+            insertArticle(newPageName);
+            break;
+    }
+};
 
 var homePage = {
     conteneur: document.querySelector('.home-content'),
     roll: document.querySelector('.home-roll'),
+    btnBack: document.querySelector('#back-to-menu'),
 
     open: function() {
         this.conteneur.classList.remove('home-content--hide');
-        document.body.style.overflow = 'hidden';
-        window.scrollTo(0, 0);
+        
+        page.goTop();
+        page.scroll(false);
 
         var stateObj = {};
         history.pushState(stateObj, "menu", "./");
@@ -17,7 +54,7 @@ var homePage = {
 
     close: function() {
         this.conteneur.classList.add('home-content--hide');
-        document.body.style.overflow = 'auto';
+        page.scroll(true);
     }
 };
 
@@ -26,7 +63,7 @@ homePage.roll.addEventListener('click', () => {
     insertPublicationList();
 });
 
-backToMenu.addEventListener('click', () => {
+homePage.btnBack.addEventListener('click', () => {
     homePage.open();
 })
 
@@ -34,7 +71,7 @@ function insertPublicationList() {
     $.get( ajaxLink , { view: "publications" },
     function( html ) {
         
-        cible.innerHTML = html;
+        page.conteneur.innerHTML = html;
         
         var stateObj = {};
         history.pushState(stateObj, "liste des publications", "./publications");
@@ -49,9 +86,7 @@ function insertPublicationList() {
 function insertArticle(articleTitle) {
     $.get( ajaxLink , { view: "publications", title:  articleTitle},
     function( html ) {
-        console.log(html);
-        
-        cible.innerHTML = html;
+        page.conteneur.innerHTML = html;
         
         var stateObj = {};
         history.pushState(stateObj, "liste des publications", "publications/" + articleTitle);
@@ -65,8 +100,6 @@ function insertArticle(articleTitle) {
 
 function transformLinks() {
     var links = document.querySelectorAll('a');
-    console.log(links);
-    
 
     links.forEach(link => {
         link.addEventListener('click', (e) => {
