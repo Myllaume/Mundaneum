@@ -2,6 +2,10 @@
     from {
         transform: rotate(0deg);
     }
+
+    20% {
+        transform: rotate(170deg);
+    }
   
     to {
         transform: rotate(360deg);
