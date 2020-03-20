@@ -1,7 +1,16 @@
 const ajaxLink = '/Mundaneum/core/controllers/rooter.php';
+activeElements();
+
+/**
+ * ==============================================
+ * Objets et méthodes de la page
+ * ==============================================
+ */
 
 var page = {
-    conteneur: document.querySelector('#cible'),
+    changeContent: function(html) {
+        document.querySelector('#cible').innerHTML = html;
+    },
 
     getName: function() {
         var pageURL = window.location.href;
@@ -26,15 +35,7 @@ var page = {
 }
 
 window.onpopstate = function(event) {
-    switch (page.getName()) {
-        case 'publications':
-            insertPublicationList();
-            break;
-
-        default:
-            insertArticle(newPageName);
-            break;
-    }
+    redirect();
 };
 
 var homePage = {
@@ -47,9 +48,6 @@ var homePage = {
         
         page.goTop();
         page.scroll(false);
-
-        var stateObj = {};
-        history.pushState(stateObj, "menu", "./");
     },
 
     close: function() {
@@ -57,6 +55,12 @@ var homePage = {
         page.scroll(true);
     }
 };
+
+/**
+ * ==============================================
+ * Mouvements de la page
+ * ==============================================
+ */
 
 homePage.roll.addEventListener('click', () => {
     homePage.close();
@@ -67,15 +71,45 @@ homePage.btnBack.addEventListener('click', () => {
     homePage.open();
 })
 
+/**
+ * ==============================================
+ * Chargement des contenus
+ * ==============================================
+ */
+
+function redirect(pageName = true) {
+
+    if (pageName === true) {
+        pageURLArray = window.location.href.split("/");
+        var pageName = pageURLArray[pageURLArray.length-1];
+    }
+
+    animLoadPage();
+
+    setTimeout(function() {
+
+        switch (pageName) {
+            case 'publications':
+                insertPublicationList();
+                break;
+    
+            default:
+                insertArticle(pageName);
+                break;
+        }
+
+    }, 4000);
+}
+
 function insertPublicationList() {
     $.get( ajaxLink , { view: "publications" },
     function( html ) {
         
-        page.conteneur.innerHTML = html;
+        page.changeContent(html);
+    
+        history.pushState({}, "liste des publications", "./publications");
         
-        var stateObj = {};
-        history.pushState(stateObj, "liste des publications", "./publications");
-        eval("transformLinks();");
+        eval("activeElements();");
         
     }, 'html' )
     .fail(function (data) {
@@ -86,36 +120,15 @@ function insertPublicationList() {
 function insertArticle(articleTitle) {
     $.get( ajaxLink , { view: "publications", title:  articleTitle},
     function( html ) {
-        page.conteneur.innerHTML = html;
         
-        var stateObj = {};
-        history.pushState(stateObj, "liste des publications", "publications/" + articleTitle);
-        eval("transformLinks();");
+        page.changeContent(html);
+        
+        history.pushState({}, "liste des publications", "publications/" + articleTitle);
+
+        eval("activeElements();");
         
     }, 'html' )
     .fail(function (data) {
         console.error(data);
     })
 }
-
-function transformLinks() {
-    var links = document.querySelectorAll('a');
-
-    links.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-
-            var url = link.href.split("/");
-            var articleTitle  = url[url.length-1];
-
-            animLoadPage();
-
-            setTimeout(function() {
-                insertArticle(articleTitle);
-            }, 5000);
-            
-        })
-    });
-}
-
-transformLinks();
