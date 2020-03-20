@@ -108,7 +108,7 @@ class Page {
     }
 
     function gen_header() {
-        include_once './core/views/header.php';
+        include_once  CORE_ROOT . '/views/header.php';
     }
 
     function gen_main($type) {
@@ -117,7 +117,7 @@ class Page {
         if ($type === true) {
             echo $this->markdown_file_to_HTML('main');
         } else {
-            include_once './core/views/' . $type;
+            include_once CORE_ROOT . '/views/' . $type;
         }
         
         echo '</section>';
@@ -131,6 +131,16 @@ class Page {
         echo '</section>';
     }
 
+    function gen_content($main = true, $lateral = true) {
+
+        if ($main) {
+            $this->gen_main($main);
+        }
+        if ($lateral) {
+            $this->gen_lateral($lateral);
+        }
+    }
+
     function gen_page($main = true, $lateral = true) {
         echo '
         <!DOCTYPE html>
@@ -139,38 +149,14 @@ class Page {
         $this->gen_head();
 
         echo '
-        <body>
+        <body>';
 
-        <div class="bg-page"></div>
-        <div class="wrapper-general">';
-
-            $this->gen_header();
+            $this->gen_body($main, $lateral);
 
         echo '
-            <div class="wrapper-content">
-
-                <main class="main-page">
-                    <div class="main-page__bg"></div>';
-
-                    if ($main) {
-                        $this->gen_main($main);
-                    }
-                    if ($lateral) {
-                        $this->gen_lateral($lateral);
-                    }
-
-        echo '
-                </main>
-
-            </div>
-        </div>';
-
-        include_once './core/views/modals.php';
-
-        echo '
-        <script src="/Mundaneum/libs/jquery.min.js"></script>
-        <script src="/Mundaneum/libs/bootstrap/js/bootstrap.min.js"></script>
-        <script src="/Mundaneum/assets/main.js"></script>
+            <script src="/Mundaneum/libs/jquery.min.js"></script>
+            <script src="/Mundaneum/libs/bootstrap/js/bootstrap.min.js"></script>
+            <script src="/Mundaneum/assets/main.js"></script>
 
         <body>
 
@@ -209,7 +195,7 @@ class Page {
             throw new Exception("Aucun fichier Markdown trouvé");
         }
     
-        include_once './libs/parsedown/Parsedown.php';
+        include_once ROOT . '/libs/parsedown/Parsedown.php';
         $parsedown_class = new Parsedown();
         return $parsedown_class->text($markdown_file_content);
     }

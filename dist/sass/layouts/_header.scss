@@ -82,12 +82,23 @@
     align-items: center;
     position: relative;
     bottom: -50px;
-    background-image: url('./fonds/fond_armillaire.svg');
-    background-repeat: no-repeat;
     width: 150px;
     height: 150px;
+    
+    &__bg {
+        position: absolute;
+        z-index: 0;
+        top: 0px;
+        left: 0px;
+        width: 100%;
+        height: 100%;
+        background-image: url('./fonds/fond_armillaire.svg');
+        background-repeat: no-repeat;
+    }
 
     &__armillaire {
+        position: relative;
+        z-index: 1;
         background-image: url('./fonds/armillaire.svg');
         background-repeat: no-repeat;
         background-position: center;

@@ -1,5 +1,5 @@
 <?php
-$content_repo = scandir('./data/');
+$content_repo = scandir(ROOT . '/data/');
 // liste des fichiers à exclure :
 $hidden_items = array('.', '..', '.htaccess', '.DS_Store');
 // séparation des fichiers et exclus

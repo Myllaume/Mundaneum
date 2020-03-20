@@ -8,11 +8,9 @@
             <button class="header-page__btn header-page__btn--menu">Menu</button>
         </div>
 
-        <a href="/Mundaneum/">
-        <div class="logo-site">
+        <div id="come-back-home" class="logo-site">
             <div class="logo-site__armillaire"></div>
         </div>
-        </a>
 
         <div class="header-page__btn-box">
             <button class="header-page__btn header-page__btn--search">Rechercher</button>

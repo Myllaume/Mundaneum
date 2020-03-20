@@ -1,27 +1,44 @@
 .main-page {
     position: relative;
-    display: flex;
     padding: 200px 20px 30px 20px;
     box-shadow: 0px 0px 50px 2px rgba(0, 0, 0, 0.2);
+    transform: translateY(0%);
+    transition: transform 2s;
+    transform-origin: 50% 0;
+    margin-bottom: 50px;
+
+    &--hidden {
+        transform: translateY(-100%);
+    }
     
     &__bg {
         position: absolute;
         background-image: url('./fonds/texture_papier.jpg');
-        background-size: cover;
-        background-repeat: repeat-y;
+        background-repeat: repeat;
         box-shadow: inset 0px 0px 20px 2px rgba(0, 0, 0, 0.5);
-        background-size: cover;
         width: 100%;
         height: 100%;
         top: 0px;
         left: 0px;
         z-index: -2;
+        border-radius: 0 0 1px 1px;
+    }
+
+    &__conteneur {
+        display: flex;
+        width: 100%;
     }
 }
 
 @media (max-width: $breakpoint-medium - 1) {
     .main-page {
         padding: 30px 20px 150px 20px;
+        margin: unset;
+        min-height: 100vh;
+
+        &--hidden {
+            transform: translateY(100%);
+        }
     }
 }
 

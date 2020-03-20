@@ -1,6 +1,5 @@
 .home-bg {
     position: absolute;
-    z-index: -1;
     top: 0px;
     left: 0px;
     width: 100%;
@@ -11,13 +10,24 @@
 }
 
 .home-content {
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    z-index: 200;
     display: flex;
     justify-content: center;
     align-items: center;
     height: 100vh;
+    transition: transform 5s;
+
+    &--hide {
+        transform: translateY(-100%);
+    }
 }
 
 .home-roll {
+    z-index: 201;
     background-image: url('./fonds/roll_mundaneum.svg');
     background-size: cover;
     width: 400px;
