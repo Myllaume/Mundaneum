@@ -7,14 +7,15 @@
         <div class="header-page__btn-box">
             <button class="header-page__btn header-page__btn--menu">Menu</button>
         </div>
-
-        <div id="come-back-home" class="logo-site">
+        
+        <div id="back-to-menu" class="logo-site">
+            <div class="logo-site__bg"></div>
             <div class="logo-site__armillaire"></div>
         </div>
 
         <div class="header-page__btn-box">
             <button class="header-page__btn header-page__btn--search">Rechercher</button>
-            <button class="header-page__btn header-page__btn--metadata" data-toggle="modal" data-target="#modal-metadata">Métadonnées</button>
+            <button class="header-page__btn header-page__btn--metadata">Métadonnées</button>
         </div>
 
     </div>

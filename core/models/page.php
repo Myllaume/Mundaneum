@@ -11,6 +11,9 @@ class Page {
         $this->id = strval($this->id);
         $this->path = strval($this->path);
         $this->title = strval($this->title);
+        $this->main_content = true;
+        $this->lateral_content = true;
+        $this->menu_is_close = true;
         $this->categorie = strval($this->categorie);
         $this->langage = 'fr';
     }
@@ -61,6 +64,43 @@ class Page {
         return $this->title;
     }
 
+    function set_main_content($var) {
+
+        if (!is_string($var) && !is_bool($var)) {
+            throw new Exception("Le main content doit être définis avec chaine de caractère ou un booléen");
+        }
+
+        $this->main_content = $var;
+    }
+
+    function get_main_content() {
+        return $this->main_content;
+    }
+
+    function set_lateral_content($var) {
+        if (!is_string($var) && !is_bool($var)) {
+            throw new Exception("Le lateral content doit être définis avec chaine de caractère ou un booléen");
+        }
+
+        $this->lateral_content = $var;
+    }
+
+    function get_lateral_content() {
+        return $this->lateral_content;
+    }
+
+    function set_menu_is_close($var) {
+        if (!is_bool($var)) {
+            throw new Exception("La fermeture de menu doit être indiquée avec un booléen");
+        }
+
+        $this->menu_is_close = $var;
+    }
+
+    function get_menu_is_close() {
+        return $this->menu_is_close;
+    }
+
     function set_categorie($var) {
         $list_categories = ['bibliotéconomie', 'sans catégorie'];
 
@@ -102,7 +142,6 @@ class Page {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>' . $this->title . '</title>
 
-            <link rel="stylesheet" href="/Mundaneum/libs/bootstrap/css/bootstrap.min.css">
             <link rel="stylesheet" href="/Mundaneum/assets/main.css">
         </head>';
     }
@@ -111,37 +150,50 @@ class Page {
         include_once  CORE_ROOT . '/views/header.php';
     }
 
-    function gen_main($type) {
+    function gen_menu() {
+        if ($this->menu_is_close) {
+        echo '
+        <div class="home-content home-content--hide">';
+    } else {
+        echo '
+        <div class="home-content">';
+        }
+
+        echo '
+            <div class="home-bg"></div>
+            <div class="home-roll"></div>
+        </div>';
+    }
+
+    function gen_content() {
+        $this->gen_main();
+
+        $this->gen_lateral();
+    }
+
+    function gen_main() {
         echo '<section class="content-page">';
 
-        if ($type === true) {
+        if ($this->main_content === true) {
             echo $this->markdown_file_to_HTML('main');
-        } else {
-            include_once CORE_ROOT . '/views/' . $type;
+        } elseif ($this->main_content !== false) {
+            include_once CORE_ROOT . '/views/' . $this->main_content;
         }
         
         echo '</section>';
     }
 
-    function gen_lateral($type) {
+    function gen_lateral() {
         echo '<section class="lateral-page">';
 
-        echo $this->markdown_file_to_HTML('lateral');
+        if ($this->lateral_content === true) {
+            echo $this->markdown_file_to_HTML('lateral');
+        }
         
         echo '</section>';
     }
 
-    function gen_content($main = true, $lateral = true) {
-
-        if ($main) {
-            $this->gen_main($main);
-        }
-        if ($lateral) {
-            $this->gen_lateral($lateral);
-        }
-    }
-
-    function gen_page($main = true, $lateral = true) {
+    function gen_page() {
         echo '
         <!DOCTYPE html>
         <html lang="fr">';
@@ -151,7 +203,31 @@ class Page {
         echo '
         <body>';
 
-            $this->gen_body($main, $lateral);
+        $this->gen_menu();
+        
+        echo '
+            <div class="bg-page"></div>
+            <div class="wrapper-general">';
+
+        $this->gen_header();
+
+        echo '
+                <div class="wrapper-content">
+
+                    <main class="main-page">
+
+                        <div class="main-page__bg"></div>
+
+                        <div id="cible" class="main-page__conteneur">';
+
+        $this->gen_content();
+
+        echo '
+                        </div>
+                    </main>
+
+                </div>
+            </div>';
 
         echo '
             <script src="/Mundaneum/libs/jquery.min.js"></script>
