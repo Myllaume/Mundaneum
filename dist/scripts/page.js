@@ -107,7 +107,7 @@ function insertPublicationList() {
         
         page.changeContent(html);
     
-        history.pushState({}, "liste des publications", "./publications");
+        history.pushState({}, 'liste des publications', '/Mundaneum/publications');
         
         eval("activeElements();");
         
@@ -123,7 +123,7 @@ function insertArticle(articleTitle) {
         
         page.changeContent(html);
         
-        history.pushState({}, "liste des publications", "publications/" + articleTitle);
+        history.pushState({}, 'article ' + articleTitle, '/Mundaneum/publications/' + articleTitle);
 
         eval("activeElements();");
         
