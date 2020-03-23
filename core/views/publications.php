@@ -4,8 +4,8 @@ $content_repo = scandir(ROOT . '/data/');
 $hidden_items = array('.', '..', '.htaccess', '.DS_Store');
 // séparation des fichiers et exclus
 $list_article = array_diff($content_repo, $hidden_items);
-?>
 
+$html .= '
 <h1>Liste des publications</h1>
 
 <table>
@@ -17,17 +17,22 @@ $list_article = array_diff($content_repo, $hidden_items);
         </tr>
     </thead>
 
-    <tbody>
-    <?php foreach ($list_article as $key => $name_article):
-    $name_article_clean = str_replace('-', ' ', $name_article);
-    $name_article_clean = ucfirst($name_article_clean);
-    ?>
+    <tbody>';
+    
+    foreach ($list_article as $key => $name_article) {
+        $name_article_clean = str_replace('-', ' ', $name_article);
+        $name_article_clean = ucfirst($name_article_clean);
+
+        
+        $html .= '
         <tr>
-            <td><a href="./publications/<?= $name_article ?>"><?= $name_article_clean ?></a></td>
+            <td><a href="./publications/' .$name_article . '">' .$name_article_clean . '</a></td>
             <td>Divers</td>
             <td>Essaie, début, départ</td>
-        </tr>
-    <?php endforeach; ?>
+        </tr>';
+    }
+
+    $html .= '
     </tbody>
 
-</table>
+</table>';

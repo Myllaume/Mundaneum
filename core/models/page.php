@@ -136,7 +136,7 @@ class Page {
      */
 
     function gen_head() {
-        echo '
+        $html = '
         <head>
             <meta charset="UTF-8">
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -144,74 +144,87 @@ class Page {
 
             <link rel="stylesheet" href="/Mundaneum/assets/main.css">
         </head>';
+
+        return $html;
     }
 
     function gen_header() {
+        $html = '';
         include_once  CORE_ROOT . '/views/header.php';
+        
+        return $html;
     }
 
     function gen_menu() {
         if ($this->menu_is_close) {
-        echo '
+        $html = '
         <div class="home-content home-content--hide">';
     } else {
-        echo '
+        $html = '
         <div class="home-content">';
         }
 
-        echo '
+        $html .= '
             <div class="home-bg"></div>
             <div class="home-roll"></div>
         </div>';
+
+        return $html;
     }
 
     function gen_content() {
-        $this->gen_main();
+        $html = $this->gen_main();
 
-        $this->gen_lateral();
+        $html .= $this->gen_lateral();
+
+        return $html;
     }
 
     function gen_main() {
-        echo '<section class="content-page">';
+        $html = '<section class="content-page">';
 
         if ($this->main_content === true) {
-            echo $this->markdown_file_to_HTML('main');
+            $html .= $this->markdown_file_to_HTML('main');
         } elseif ($this->main_content !== false) {
             include_once CORE_ROOT . '/views/' . $this->main_content;
         }
         
-        echo '</section>';
+        $html .= '</section>';
+
+        return $html;
     }
 
     function gen_lateral() {
-        echo '<section class="lateral-page">';
+        $html = '<section class="lateral-page">';
 
         if ($this->lateral_content === true) {
-            echo $this->markdown_file_to_HTML('lateral');
+            $html .= $this->markdown_file_to_HTML('lateral');
         }
         
-        echo '</section>';
+        $html .= '</section>';
+
+        return $html;
     }
 
     function gen_page() {
-        echo '
+        $html = '
         <!DOCTYPE html>
         <html lang="fr">';
 
-        $this->gen_head();
+        $html .= $this->gen_head();
 
-        echo '
+        $html .= '
         <body>';
 
-        $this->gen_menu();
+        $html .= $this->gen_menu();
         
-        echo '
+        $html .= '
             <div class="bg-page"></div>
             <div class="wrapper-general">';
 
-        $this->gen_header();
+        $html .= $this->gen_header();
 
-        echo '
+        $html .= '
                 <div class="wrapper-content">
 
                     <main class="main-page">
@@ -220,16 +233,16 @@ class Page {
 
                         <div id="cible" class="main-page__conteneur">';
 
-        $this->gen_content();
+        $html .= $this->gen_content();
 
-        echo '
+        $html .= '
                         </div>
                     </main>
 
                 </div>
             </div>';
 
-        echo '
+        $html .= '
             <script src="/Mundaneum/libs/jquery.min.js"></script>
             <script src="/Mundaneum/libs/bootstrap/js/bootstrap.min.js"></script>
             <script src="/Mundaneum/assets/main.js"></script>
@@ -237,25 +250,27 @@ class Page {
         <body>
 
         </html>';
+
+        return $html;
     }
 
-    function gen_metadata_board() {
-        $metadata_list = $this->JSON_file_to_Page();
+    // function gen_metadata_board() {
+    //     $metadata_list = $this->JSON_file_to_Page();
 
-        echo '
-        <table>
-            <tbody>';
-        foreach ($metadata_list as $metadata => $value) {
-            echo '
-                <tr>
-                    <td>' . $metadata . '<td>
-                    <td>' . $value . '<td>
-                </tr>';
-        }
-        echo '
-            </tbody>
-        </table>';
-    }
+    //     echo '
+    //     <table>
+    //         <tbody>';
+    //     foreach ($metadata_list as $metadata => $value) {
+    //         echo '
+    //             <tr>
+    //                 <td>' . $metadata . '<td>
+    //                 <td>' . $value . '<td>
+    //             </tr>';
+    //     }
+    //     echo '
+    //         </tbody>
+    //     </table>';
+    // }
 
     /**
      * ======================================================

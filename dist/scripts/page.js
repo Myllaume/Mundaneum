@@ -8,8 +8,9 @@ activeElements();
  */
 
 var page = {
-    changeContent: function(html) {
-        document.querySelector('#cible').innerHTML = html;
+    changeContent: function(json) {
+        document.querySelector('#cible').innerHTML = json.html;
+        document.title = json.title;
     },
 
     getName: function() {
@@ -103,15 +104,15 @@ function redirect(pageName = true) {
 
 function insertPublicationList() {
     $.get( ajaxLink , { view: "publications" },
-    function( html ) {
+    function( json ) {
         
-        page.changeContent(html);
+        page.changeContent(json);
     
         history.pushState({}, 'liste des publications', '/Mundaneum/publications');
         
         eval("activeElements();");
         
-    }, 'html' )
+    }, 'json' )
     .fail(function (data) {
         console.error(data);
     })
@@ -119,15 +120,15 @@ function insertPublicationList() {
 
 function insertArticle(articleTitle) {
     $.get( ajaxLink , { view: "publications", title:  articleTitle},
-    function( html ) {
+    function( json ) {
         
-        page.changeContent(html);
+        page.changeContent(json);
         
         history.pushState({}, 'article ' + articleTitle, '/Mundaneum/publications/' + articleTitle);
 
         eval("activeElements();");
         
-    }, 'html' )
+    }, 'json' )
     .fail(function (data) {
         console.error(data);
     })

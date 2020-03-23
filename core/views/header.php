@@ -1,3 +1,5 @@
+<?php
+$html = '
 <header class="header-page">
 
     <div class="header-page__bg"></div>
@@ -20,4 +22,4 @@
 
     </div>
 
-</header>
+</header>';
