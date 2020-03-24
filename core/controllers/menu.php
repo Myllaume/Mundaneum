@@ -24,7 +24,7 @@ if ($content_repo) {
     // séparation des fichiers et exclus
     $list_article = array_diff($content_repo, $hidden_items);
 
-    $html .= '<ul class="navigation">';
+    $html .= '<ul class="navigation-list">';
 
     foreach ($list_article as $key => $value) {
         $html .= '<li><a href="' . $_GET['type'] . '/' . $value . '">'. $value . '</a></li>';

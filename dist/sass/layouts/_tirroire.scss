@@ -4,6 +4,8 @@
     width: 80%;
     z-index: -2;
     min-height: 200px;
+    transform: translateY(-100%);
+    transition: transform .5s;
     
     &__bg {
         background-image: url('./fonds/texture_papier_fonce.jpg');
@@ -19,15 +21,18 @@
         left: 0px;
         width: 100%;
         height: 100%;
-        
     }
     
     &__conteneur {
-        padding: 50px 20px 0 20px;
+        padding: 120px 20px 0 20px;
+    }
+
+    &--visible {
+        transform: translateY(0%);
     }
 }
 
-.navigation {
+.navigation-list {
     list-style: none;
     padding: 0;
     margin: 0;
@@ -46,5 +51,28 @@
         text-decoration: none;
         padding: 1rem 0;
         color: inherit;
+    }
+}
+
+.form-recherche {
+    display: flex;
+    flex-direction: column;
+
+    &__field {
+        @extend %font-body-regular;
+        background: transparent;
+        border-top: unset;
+        border-left: unset;
+        border-right: unset;
+        border-bottom: 1px solid black;
+        font-size: 2rem;
+    }
+
+    &__btn{
+        @extend %font-head-regular;
+        background: transparent;
+        border: unset;
+        font-size: 3rem;
+        margin: 2rem 0;
     }
 }

@@ -16,17 +16,17 @@ $html = '
         </div>
 
         <div class="header-page__btn-box">
-            <button class="header-page__btn header-page__btn--search">Rechercher</button>
-            <button class="header-page__btn header-page__btn--metadata">Métadonnées</button>
+            <button id="btn-heander-search" class="header-page__btn header-page__btn--search">Rechercher</button>
+            <button id="btn-heander-meta" class="header-page__btn header-page__btn--metadata">Métadonnées</button>
         </div>
 
         
         </div>
         
         <div class="wrapper-content flex-center">
-        <div class="tirroire">
+        <div id="tirroire" class="tirroire">
             <div class="tirroire__bg"></div>
-            <div id="tirroire" class="tirroire__conteneur"></div>
+            <div id="tirroire-conteneur" class="tirroire__conteneur"></div>
         </div>
         </div>
 </header>';
