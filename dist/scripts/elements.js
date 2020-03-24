@@ -16,9 +16,10 @@ function transformLinks() {
             e.preventDefault();
 
             var url = link.href.split("/");
-            var articleTitle  = url[url.length-1];
+            var pageName = url[url.length-1];
+            var pageType = url[url.length-2];
 
-            redirect(articleTitle);
+            redirect(pageName, pageType);
             
         })
     });

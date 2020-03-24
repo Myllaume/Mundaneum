@@ -142,6 +142,7 @@ class Page {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>' . $this->title . '</title>
 
+            <link rel="stylesheet" href="/Mundaneum/libs/chart/chart.min.css">
             <link rel="stylesheet" href="/Mundaneum/assets/main.css">
         </head>';
 
@@ -150,7 +151,7 @@ class Page {
 
     function gen_header() {
         $html = '';
-        include_once  CORE_ROOT . '/views/header.php';
+        include  CORE_ROOT . '/views/header.php';
         
         return $html;
     }
@@ -186,7 +187,7 @@ class Page {
         if ($this->main_content === true) {
             $html .= $this->markdown_file_to_HTML('main');
         } elseif ($this->main_content !== false) {
-            include_once CORE_ROOT . '/views/' . $this->main_content;
+            include $this->path . '/' . $this->main_content;
         }
         
         $html .= '</section>';
@@ -202,6 +203,14 @@ class Page {
         }
         
         $html .= '</section>';
+
+        return $html;
+    }
+
+    function gen_modal() {
+        $html = '';
+
+        include CORE_ROOT . '/views/modals.php';
 
         return $html;
     }
@@ -241,6 +250,8 @@ class Page {
 
                 </div>
             </div>';
+
+        // $html .= $this->gen_modal();
 
         $html .= '
             <script src="/Mundaneum/libs/jquery.min.js"></script>
@@ -286,7 +297,7 @@ class Page {
             throw new Exception("Aucun fichier Markdown trouvé");
         }
     
-        include_once ROOT . '/libs/parsedown/Parsedown.php';
+        include_once ROOT . '/libs/parsedown.php';
         $parsedown_class = new Parsedown();
         return $parsedown_class->text($markdown_file_content);
     }

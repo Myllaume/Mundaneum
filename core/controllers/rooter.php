@@ -21,7 +21,7 @@ if(!empty($_SERVER['HTTP_X_REQUESTED_WITH'])
     define('ROOT', './');
 }
 
-include_once CORE_ROOT . '/models/page.php';
+include CORE_ROOT . '/models/page.php';
 
 $redirect = false;
 $html = '';
@@ -55,6 +55,7 @@ switch ($view) {
 
         if (empty($_GET['title'])) {
             $class_page = new Page;
+            $class_page->set_path( ROOT . '/data/publications_list/');
             $class_page->set_title('Liste des publications');
             $title = $class_page->get_title();
             $class_page->set_main_content('publications.php');
@@ -68,7 +69,7 @@ switch ($view) {
         } else {
             try {
                 $class_page = new Page;
-                $class_page->set_path( ROOT . '/data/' . $_GET['title'] . '/');
+                $class_page->set_path( ROOT . '/data/articles/' . $_GET['title'] . '/');
                 $class_page->set_title($_GET['title']);
                 $title = $class_page->get_title();
                 if ($in_XHR_req) {
@@ -79,7 +80,7 @@ switch ($view) {
                 }
                 
             } catch (Exception $error) {
-                header('Location: /Mundaneum/publications');
+                header('Location: /Mundaneum/' . $_GET['view']);
                 $class_page = new Page;
                 $class_page->set_title('Liste des publications');
                 $title = $class_page->get_title();
@@ -94,6 +95,54 @@ switch ($view) {
             }
         }
                 
+        break;
+
+    case 'donnees':
+
+        if (empty($_GET['title'])) {
+            $class_page = new Page;
+            $class_page->set_path( ROOT . '/data/donnees_list/');
+            $class_page->set_title('Liste des tableaux de données');
+            $title = $class_page->get_title();
+            $class_page->set_main_content('tableaux_donnees.php');
+            $class_page->set_lateral_content(false);
+            if ($in_XHR_req) {
+                $html = $class_page->gen_content();
+            } else {
+                echo $class_page->gen_page();
+                exit;
+            }
+        } else {
+            try {
+                $class_page = new Page;
+                $class_page->set_path( ROOT . 'data/donnees/' . $_GET['title'] . '/');
+                $class_page->set_title($_GET['title']);
+                $title = $class_page->get_title();
+                $class_page->set_lateral_content(false);
+                if ($in_XHR_req) {
+                    $html = $class_page->gen_content();
+                } else {
+                    echo $class_page->gen_page();
+                    exit;
+                }
+                
+            } catch (Exception $error) {
+                header('Location: /Mundaneum/' . $_GET['view']);
+                $class_page = new Page;
+                $class_page->set_path( ROOT . '/data/donnees_list/');
+                $class_page->set_title('Liste des tableaux de données');
+                $title = $class_page->get_title();
+                $class_page->set_main_content('tableaux_donnees.php');
+                $class_page->set_lateral_content(false);
+                if ($in_XHR_req) {
+                    $html = $class_page->gen_content();
+                } else {
+                    echo $class_page->gen_page();
+                    exit;
+                }
+            }
+        }
+
         break;
 
     default:

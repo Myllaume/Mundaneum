@@ -36,7 +36,9 @@ var page = {
 }
 
 window.onpopstate = function(event) {
-    redirect();
+    console.log(event.state);
+    
+    redirect(event.state.title, event.state.type);
 };
 
 var homePage = {
@@ -78,24 +80,31 @@ homePage.btnBack.addEventListener('click', () => {
  * ==============================================
  */
 
-function redirect(pageName = true) {
-
-    if (pageName === true) {
-        pageURLArray = window.location.href.split("/");
-        var pageName = pageURLArray[pageURLArray.length-1];
-    }
+function redirect(pageName, pageType) {
 
     animLoadPage();
 
     setTimeout(function() {
 
-        switch (pageName) {
+        switch (pageType) {
             case 'publications':
-                insertPublicationList();
+
+                if (pageName == 'publications_list') {
+                    insertPublicationList();
+                } else {
+                    insertArticle(pageName);
+                }
+
                 break;
     
-            default:
-                insertArticle(pageName);
+            case 'donnees':
+
+                if (pageName == 'donnees_list') {
+                    // insertPublicationList();
+                } else {
+                    insertDonnees(pageName);
+                }
+
                 break;
         }
 
@@ -108,7 +117,10 @@ function insertPublicationList() {
         
         page.changeContent(json);
     
-        history.pushState({}, 'liste des publications', '/Mundaneum/publications');
+        history.pushState({
+            type: 'publications',
+            title: 'publications_list'
+        }, 'liste des publications', '/Mundaneum/publications');
         
         eval("activeElements();");
         
@@ -124,7 +136,29 @@ function insertArticle(articleTitle) {
         
         page.changeContent(json);
         
-        history.pushState({}, 'article ' + articleTitle, '/Mundaneum/publications/' + articleTitle);
+        history.pushState({
+            type: 'publications',
+            title: articleTitle
+        }, 'article ' + articleTitle, '/Mundaneum/publications/' + articleTitle);
+
+        eval("activeElements();");
+        
+    }, 'json' )
+    .fail(function (data) {
+        console.error(data);
+    })
+}
+
+function insertDonnees(donneesTitle) {
+    $.get( ajaxLink , { view: "donnees", title:  donneesTitle},
+    function( json ) {
+        
+        page.changeContent(json);
+        
+        history.pushState({
+            type: 'donnees',
+            title: donneesTitle
+        }, 'article ' + donneesTitle, '/Mundaneum/donnees/' + donneesTitle);
 
         eval("activeElements();");
         

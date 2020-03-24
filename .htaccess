@@ -10,3 +10,4 @@ RewriteEngine on
 
 RewriteRule ^([a-z]+)$ ./index.php?view=$1 [L]
 RewriteRule ^publications/([a-zA-Z0-9_'-]+)$ ./index.php?view=publications&title=$1 [L]
+RewriteRule ^donnees/([a-zA-Z0-9_'-]+)$ ./index.php?view=donnees&title=$1 [L]
