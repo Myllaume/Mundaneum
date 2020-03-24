@@ -1,13 +1,31 @@
 /**
  * ==============================================
- * Boutons du header
+ * Boutons et méthodes d'action du header
  * ==============================================
  */
 
-var headerBtns = {
-    menu: document.querySelector('#btn-heander-menu'),
-    meta: document.querySelector('#btn-heander-meta'),
-    search: document.querySelector('#btn-heander-search')
+var headerActions = {
+    btn: {
+        menu: document.querySelector('#btn-heander-menu'),
+        meta: document.querySelector('#btn-heander-meta'),
+        search: document.querySelector('#btn-heander-search')
+    },
+
+    switch: function(btn) {
+        switch (btn) {
+            case this.btn.menu:
+                genMenu();
+                break;
+    
+            case this.btn.search:
+                formSearch.gen();
+                break;
+    
+            case this.btn.meta:
+                
+                break;
+        }
+    }
 };
 
 /**
@@ -26,22 +44,12 @@ var tirroire = {
     },
 
     open: function() {
-        tirroire.this.classList.add('tirroire--visible');
+        this.this.classList.add('tirroire--visible');
     },
 
     close: function() {
-        tirroire.this.classList.remove('tirroire--visible');
-    },
-
-    toggle: function() {
-        // ouverture et fermeture alternées du tirroire
-        if (this.isOpen) {
-            tirroire.close();
-            this.isOpen = false;
-        } else {
-            tirroire.open();
-            this.isOpen = true;
-        }
+        this.this.classList.remove('tirroire--visible');
+        setTimeout(function() { this.conteneur.innerHTML = ''; }.bind(this), 500);
     }
 };
 
@@ -59,19 +67,19 @@ var formSearch = {
     gen: function() {
         tirroire.conteneur.innerHTML = '';
 
-        this.this.classList.add('form-recherche');
+        formSearch.this.classList.add('form-recherche');
 
-        this.field.setAttribute('type', 'text');
-        this.field.setAttribute('placeholder', 'Votre recherche');
-        this.field.classList.add('form-recherche__field');
+        formSearch.field.setAttribute('type', 'text');
+        formSearch.field.setAttribute('placeholder', 'Votre recherche');
+        formSearch.field.classList.add('form-recherche__field');
         
-        this.btn.setAttribute('type', 'submit');
-        this.btn.textContent = 'Rechercher';
-        this.btn.classList.add('form-recherche__btn');
+        formSearch.btn.setAttribute('type', 'submit');
+        formSearch.btn.textContent = 'Rechercher';
+        formSearch.btn.classList.add('form-recherche__btn');
 
-        this.this.appendChild(this.field);
-        this.this.appendChild(this.btn);
-        tirroire.conteneur.appendChild(this.this);
+        formSearch.this.appendChild(formSearch.field);
+        formSearch.this.appendChild(formSearch.btn);
+        tirroire.conteneur.appendChild(formSearch.this);
     }
 };
 
@@ -81,24 +89,40 @@ var formSearch = {
  * ==============================================
  */
 
-Object.values(headerBtns).forEach(btn => {
+Object.values(headerActions.btn).forEach(btn => {
     // tous les boutons du header activent 'tirroire.toggle'
-    btn.addEventListener('click', tirroire.toggle);
+    btn.addEventListener('click', (e) => {
+        if (!tirroire.isOpen) {
+            tirroire.isOpen = e.target;
+
+            tirroire.open();
+            headerActions.switch(e.target);
+        } else if (tirroire.isOpen === e.target) {
+            tirroire.isOpen = false;
+            
+            tirroire.close();
+        } else {
+            tirroire.isOpen = e.target;
+
+            tirroire.close();
+            setTimeout(function() {
+                tirroire.open();
+                headerActions.switch(e.target);
+            }.bind(this), 1000);
+        }
+    });
 });
 
-headerBtns.menu.addEventListener('click', () => {
-    
-    $.get( '/Mundaneum/core/controllers/menu.php' , { type: "publications"},
-    function( html ) {
-        
-        tirroire.changeContent(html);
-        
-    }, 'html' )
-    .fail(function (data) {
-        console.error(data);
-    })
-});
-
-headerBtns.search.addEventListener('click', () => {
-    formSearch.gen();
-});
+function genMenu() {
+    setTimeout(() => {
+        $.get( '/Mundaneum/core/controllers/menu.php' , { type: "publications"},
+        function( html ) {
+            
+            tirroire.changeContent(html);
+            
+        }, 'html' )
+        .fail(function (data) {
+            console.error(data);
+        })
+    }, 100);
+}
