@@ -7,7 +7,7 @@ $html = '
     <div class="wrapper-content flex-center">
 
         <div class="header-page__btn-box">
-            <button class="header-page__btn header-page__btn--menu">Menu</button>
+            <button id="btn-heander-menu" class="header-page__btn header-page__btn--menu">Menu</button>
         </div>
         
         <div id="back-to-menu" class="logo-site">
@@ -20,6 +20,13 @@ $html = '
             <button class="header-page__btn header-page__btn--metadata">Métadonnées</button>
         </div>
 
-    </div>
-
+        
+        </div>
+        
+        <div class="wrapper-content flex-center">
+        <div class="tirroire">
+            <div class="tirroire__bg"></div>
+            <div id="tirroire" class="tirroire__conteneur"></div>
+        </div>
+        </div>
 </header>';
