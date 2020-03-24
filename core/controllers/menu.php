@@ -1,8 +1,6 @@
 <?php
 
-if (isset($_GET) && !empty($_GET['type'])) {
-    $type = $_GET['type'];
-} else {
+if (!isset($_GET) || empty($_GET['type'])) {
     exit;
 }
 
@@ -14,7 +12,7 @@ switch ($_GET['type']) {
         break;
 
     case 'donnees':
-        $content_repo = scandir('../../data/articles/');
+        $content_repo = scandir('../../data/donnes/');
         break;
 }
 

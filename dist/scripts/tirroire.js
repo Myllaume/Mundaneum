@@ -22,7 +22,7 @@ var headerActions = {
                 break;
     
             case this.btn.meta:
-                
+                genMeta();
                 break;
         }
     }
@@ -49,7 +49,6 @@ var tirroire = {
 
     close: function() {
         this.this.classList.remove('tirroire--visible');
-        setTimeout(function() { this.conteneur.innerHTML = ''; }.bind(this), 500);
     }
 };
 
@@ -116,6 +115,21 @@ Object.values(headerActions.btn).forEach(btn => {
 function genMenu() {
     setTimeout(() => {
         $.get( '/Mundaneum/core/controllers/menu.php' , { type: "publications"},
+        function( html ) {
+            
+            tirroire.changeContent(html);
+            
+        }, 'html' )
+        .fail(function (data) {
+            console.error(data);
+        })
+    }, 100);
+}
+
+function genMeta() {
+    setTimeout(() => {
+
+        $.get( '/Mundaneum/core/controllers/meta.php' , { type: "publications", title: "essaie" },
         function( html ) {
             
             tirroire.changeContent(html);
