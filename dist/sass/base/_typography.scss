@@ -21,21 +21,24 @@ body {
     font-size: 1.9rem;
     color: $color-noir;
     letter-spacing: -.1rem;
-    line-height: 2rem;
+    line-height: 2.2rem;
     text-align: left;
 }
 
 h1 {
     @extend %font-head-regular;
     font-size: 4rem;
+    line-height: 4rem;
 }
 
 h2 {
     @extend %font-head-regular;
     font-size: 2.8rem;
+    line-height: 2.8rem;
 }
 
 h3 {
     @extend %font-head-regular;
     font-size: 2.2rem;
+    line-height: 2.2rem;
 }

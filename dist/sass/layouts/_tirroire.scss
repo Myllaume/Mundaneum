@@ -47,13 +47,12 @@
 
         &:not(:last-child) {
             border-bottom: 1px solid black;
-            padding-bottom: .5rem;
+            padding-bottom: 2rem;
         }
     }
     
     a {
         text-decoration: none;
-        padding: 1rem 0;
         color: inherit;
     }
 }
