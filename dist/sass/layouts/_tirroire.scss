@@ -1,11 +1,15 @@
 .tirroire {
     position: relative;
-    top: -50px;
+    top: 240px;
     width: 80%;
-    z-index: -2;
     min-height: 200px;
     transform: translateY(-100%);
     transition: transform .5s;
+    
+    &__wrapper {
+        z-index: -2;
+        top: -100%;
+    }
     
     &__bg {
         background-image: url('./fonds/texture_papier_fonce.jpg');

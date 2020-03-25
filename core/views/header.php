@@ -23,7 +23,7 @@ $html = '
         
         </div>
         
-        <div class="wrapper-content flex-center">
+        <div class="wrapper-content flex-center tirroire__wrapper">
         <div id="tirroire" class="tirroire">
             <div class="tirroire__bg"></div>
             <div id="tirroire-conteneur" class="tirroire__conteneur"></div>
