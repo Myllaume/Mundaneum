@@ -61,6 +61,7 @@ var tirroire = {
 var formSearch = {
     this: document.createElement('form'),
     field: document.createElement('input'),
+    feedback: document.createElement('div'),
     btn: document.createElement('button'),
 
     gen: function() {
@@ -79,6 +80,25 @@ var formSearch = {
         formSearch.this.appendChild(formSearch.field);
         formSearch.this.appendChild(formSearch.btn);
         tirroire.conteneur.appendChild(formSearch.this);
+        tirroire.conteneur.appendChild(formSearch.feedback);
+
+        formSearch.this.addEventListener('submit', (e) => {
+            e.preventDefault();
+            this.search('publications', formSearch.field.value);
+        });
+    },
+
+    search: function(type, keyword) {
+        $.get( '/Mundaneum/core/controllers/search.php' , { type: type, search: keyword},
+        function( html ) {
+            
+            formSearch.feedback.innerHTML = '<h3>Résultats</h3>' + html;
+            eval('activeElements();');
+            
+        }, 'html' )
+        .fail(function (data) {
+            console.error(data);
+        })
     }
 };
 
@@ -118,6 +138,7 @@ function genMenu() {
         function( html ) {
             
             tirroire.changeContent(html);
+            eval('activeElements();');
             
         }, 'html' )
         .fail(function (data) {
@@ -133,6 +154,7 @@ function genMeta() {
         function( html ) {
             
             tirroire.changeContent(html);
+            eval('activeElements();');
             
         }, 'html' )
         .fail(function (data) {

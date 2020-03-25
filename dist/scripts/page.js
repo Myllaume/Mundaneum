@@ -122,7 +122,7 @@ function insertPublicationList() {
             title: 'publications_list'
         }, 'liste des publications', '/Mundaneum/publications');
         
-        eval("activeElements();");
+        eval('activeElements();');
         
     }, 'json' )
     .fail(function (data) {
@@ -141,7 +141,7 @@ function insertArticle(articleTitle) {
             title: articleTitle
         }, 'article ' + articleTitle, '/Mundaneum/publications/' + articleTitle);
 
-        eval("activeElements();");
+        eval('activeElements();');
         
     }, 'json' )
     .fail(function (data) {
@@ -160,7 +160,7 @@ function insertDonnees(donneesTitle) {
             title: donneesTitle
         }, 'article ' + donneesTitle, '/Mundaneum/donnees/' + donneesTitle);
 
-        eval("activeElements();");
+        eval('activeElements();');
         
     }, 'json' )
     .fail(function (data) {
