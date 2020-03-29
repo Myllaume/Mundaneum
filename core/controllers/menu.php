@@ -25,7 +25,7 @@ if ($content_repo) {
     $html .= '<ul class="navigation-list">';
 
     foreach ($list_article as $key => $value) {
-        $html .= '<li><a href="' . $_GET['type'] . '/' . $value . '">'. $value . '</a></li>';
+        $html .= '<li><a href="/Mundaneum/' . $_GET['type'] . '/' . $value . '">'. $value . '</a></li>';
     }
 
     $html .= '</ul>';

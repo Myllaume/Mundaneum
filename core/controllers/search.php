@@ -55,7 +55,7 @@ $html .= '<ul class="search-list">';
 foreach ($valid_JSONs as $key) {
     $html .= '
     <li>
-        <a href="' . $_GET['type'] . '/' . $JSONs_content[$key]['id'] . '">
+        <a href="/Mundaneum/' . $_GET['type'] . '/' . $JSONs_content[$key]['id'] . '">
             '. $JSONs_content[$key]['titre'] .'
         </a>
     </li>';

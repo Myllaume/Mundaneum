@@ -5,4 +5,5 @@ package-lock.json
 /assets
 /libs
 /data
+/images
 dist/.DS_Store
