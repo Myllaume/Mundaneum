@@ -142,6 +142,8 @@ class Page {
             <meta name="viewport" content="width=device-width, initial-scale=1.0">
             <title>' . $this->title . '</title>
 
+            <link rel="icon" type="image/jpg" href="/Mundaneum/assets/fonds/favicon.png" />
+
             <link rel="stylesheet" href="/Mundaneum/libs/chart/chart.min.css">
             <link rel="stylesheet" href="/Mundaneum/assets/main.css">
         </head>';
@@ -168,6 +170,11 @@ class Page {
         $html .= '
             <div class="home-bg"></div>
             <div class="home-roll"></div>
+            <div class="mentions-legales">
+            Site web réalisé par Amélie Verdier, Élisa Twardowski, Nolwenn Cloarec et Guillaume Brioudes.
+            Crédits image fond de bibliothèque : <a target="_blank" href="https://unsplash.com/@alfonsmc10">Alfons Morales</a>.
+            Dépôt de code source : <a target="_blank" href="https://github.com/Myllaume/Mundaneum">github/Myllaume/Mundaneum</a>
+            </div>
         </div>';
 
         return $html;
@@ -264,24 +271,6 @@ class Page {
 
         return $html;
     }
-
-    // function gen_metadata_board() {
-    //     $metadata_list = $this->JSON_file_to_Page();
-
-    //     echo '
-    //     <table>
-    //         <tbody>';
-    //     foreach ($metadata_list as $metadata => $value) {
-    //         echo '
-    //             <tr>
-    //                 <td>' . $metadata . '<td>
-    //                 <td>' . $value . '<td>
-    //             </tr>';
-    //     }
-    //     echo '
-    //         </tbody>
-    //     </table>';
-    // }
 
     /**
      * ======================================================

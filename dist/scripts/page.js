@@ -86,6 +86,9 @@ function redirect(pageName, pageType) {
 
     setTimeout(function() {
 
+        sessionStorage.setItem('title', pageName);
+        
+
         switch (pageType) {
             case 'publications':
 

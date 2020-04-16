@@ -27,6 +27,7 @@
 }
 
 .home-roll {
+    cursor: pointer;
     z-index: 201;
     background-image: url('./fonds/roll_mundaneum.svg');
     background-size: cover;
@@ -34,4 +35,11 @@
     height: 400px;
     background-color: #cfcfcf;
     border-radius: 50%;
+}
+
+.mentions-legales {
+    position: absolute;
+    bottom: 0px;
+    background-color: rgba(207, 207, 207, 0.5);
+    padding: 2rem;
 }

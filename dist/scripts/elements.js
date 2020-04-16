@@ -18,7 +18,7 @@ function transformLinks() {
             if (url[url.length-3] != 'Mundaneum') {
                 return;
             }
-            
+
             e.preventDefault();
             var pageName = url[url.length-1];
             var pageType = url[url.length-2];

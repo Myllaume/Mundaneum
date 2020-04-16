@@ -70,7 +70,7 @@ var formSearch = {
         formSearch.this.classList.add('form-recherche');
 
         formSearch.field.setAttribute('type', 'text');
-        formSearch.field.setAttribute('placeholder', 'Votre recherche');
+        formSearch.field.setAttribute('placeholder', 'Recherche par mot-clé');
         formSearch.field.classList.add('form-recherche__field');
         
         formSearch.btn.setAttribute('type', 'submit');
@@ -150,7 +150,7 @@ function genMenu() {
 function genMeta() {
     setTimeout(() => {
 
-        $.get( '/Mundaneum/core/controllers/meta.php' , { type: "publications", title: "essaie" },
+        $.get( '/Mundaneum/core/controllers/meta.php' , { type: "publications", title: sessionStorage.getItem('title') },
         function( html ) {
             
             tirroire.changeContent(html);
