@@ -97,14 +97,14 @@ switch ($view) {
                 
         break;
 
-    case 'donnees':
+    case 'publications_en':
 
         if (empty($_GET['title'])) {
             $class_page = new Page;
-            $class_page->set_path( ROOT . '/data/donnees_list/');
-            $class_page->set_title('Liste des tableaux de données');
+            $class_page->set_path( ROOT . '/data/publications_list_english/');
+            $class_page->set_title('List of articles');
             $title = $class_page->get_title();
-            $class_page->set_main_content('tableaux_donnees.php');
+            $class_page->set_main_content('publications_english.php');
             $class_page->set_lateral_content(false);
             if ($in_XHR_req) {
                 $html = $class_page->gen_content();
@@ -115,7 +115,7 @@ switch ($view) {
         } else {
             try {
                 $class_page = new Page;
-                $class_page->set_path( ROOT . 'data/donnees/' . $_GET['title'] . '/');
+                $class_page->set_path( ROOT . 'data/articles_english/' . $_GET['title'] . '/');
                 $class_page->set_title($_GET['title']);
                 $title = $class_page->get_title();
                 $class_page->set_lateral_content(false);
@@ -129,10 +129,10 @@ switch ($view) {
             } catch (Exception $error) {
                 header('Location: /Mundaneum/' . $_GET['view']);
                 $class_page = new Page;
-                $class_page->set_path( ROOT . '/data/donnees_list/');
-                $class_page->set_title('Liste des tableaux de données');
+                $class_page->set_path( ROOT . '/data/publications_list_english/');
+                $class_page->set_title('List of articles');
                 $title = $class_page->get_title();
-                $class_page->set_main_content('tableaux_donnees.php');
+                $class_page->set_main_content('publications_english.php');
                 $class_page->set_lateral_content(false);
                 if ($in_XHR_req) {
                     $html = $class_page->gen_content();

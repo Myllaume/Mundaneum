@@ -171,7 +171,7 @@ class Page {
             <div class="home-bg"></div>
             <div class="home-roll"></div>
             <div class="mentions-legales">
-            Site web réalisé par Amélie Verdier, Élisa Twardowski, Nolwenn Cloarec et Guillaume Brioudes.
+            Site web réalisé par Amélie Verdier, Élisa Twardowski, Nolwenn Cloarec, Sarah Mahtallah et Guillaume Brioudes.
             Crédits image fond de bibliothèque : <a target="_blank" href="https://unsplash.com/@alfonsmc10">Alfons Morales</a>.
             Dépôt de code source : <a target="_blank" href="https://github.com/Myllaume/Mundaneum">github/Myllaume/Mundaneum</a>
             </div>

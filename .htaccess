@@ -8,6 +8,6 @@ RewriteEngine on
 # Règles de réécriture d'URL :
 #--------------------------------------------------
 
-RewriteRule ^([a-z]+)$ ./index.php?view=$1 [L]
+RewriteRule ^([a-zA-Z0-9_'-]+)$ ./index.php?view=$1 [L]
 RewriteRule ^publications/([a-zA-Z0-9_'-]+)$ ./index.php?view=publications&title=$1 [L]
-RewriteRule ^donnees/([a-zA-Z0-9_'-]+)$ ./index.php?view=donnees&title=$1 [L]
+RewriteRule ^publications_en/([a-zA-Z0-9_'-]+)$ ./index.php?view=publications_en&title=$1 [L]

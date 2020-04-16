@@ -100,12 +100,12 @@ function redirect(pageName, pageType) {
 
                 break;
     
-            case 'donnees':
+            case 'publications_en':
 
-                if (pageName == 'donnees_list') {
-                    // insertPublicationList();
+                if (pageName == 'publications_list_english') {
+                    insertPublicationListEnglish();
                 } else {
-                    insertDonnees(pageName);
+                    insertArticleEnglish(pageName);
                 }
 
                 break;
@@ -124,6 +124,25 @@ function insertPublicationList() {
             type: 'publications',
             title: 'publications_list'
         }, 'liste des publications', '/Mundaneum/publications');
+        
+        eval('activeElements();');
+        
+    }, 'json' )
+    .fail(function (data) {
+        console.error(data);
+    })
+}
+
+function insertPublicationListEnglish() {
+    $.get( ajaxLink , { view: "publications_en" },
+    function( json ) {
+        
+        page.changeContent(json);
+    
+        history.pushState({
+            type: 'publications_en',
+            title: 'publications_list_english'
+        }, 'liste des publications', '/Mundaneum/publications_en');
         
         eval('activeElements();');
         
@@ -152,16 +171,16 @@ function insertArticle(articleTitle) {
     })
 }
 
-function insertDonnees(donneesTitle) {
-    $.get( ajaxLink , { view: "donnees", title:  donneesTitle},
+function insertArticleEnglish(articleTitle) {
+    $.get( ajaxLink , { view: "publications_en", title:  articleTitle},
     function( json ) {
         
         page.changeContent(json);
         
         history.pushState({
-            type: 'donnees',
-            title: donneesTitle
-        }, 'article ' + donneesTitle, '/Mundaneum/donnees/' + donneesTitle);
+            type: 'publications_en',
+            title: articleTitle
+        }, 'article ' + articleTitle, '/Mundaneum/publications_en/' + articleTitle);
 
         eval('activeElements();');
         
